@@ -1,0 +1,56 @@
+* Rules
+** Regular NaC
+ * There are two players.
+ * They take turns claiming squares in a 3x3 grid
+ * First player to claim 3 squares in a line wins.
+** Meta NaC
+ * There are two players.
+ * They take turns taking turns in a 3x3 grid of regular NaC boards.
+ * The next turn must take place in the board corresponding to the
+   square that was last played unless that board is already won, in
+   which case the turn may be taken on any un-won board.
+ * The first player to win three boards in a row wins.
+* Implementation Details
+** TODO Components [0/3]
+*** TODO nac-cell
+ * Represents a single board cell
+ * Can contain an X or an O or be blank
+ * Can be clicked on to make a move (if it's blank)
+------
+ * state is {:contains :x|:o|nil, :chan (chan)}
+ * onclick sends a message up the chan if the cell is empty
+*** TODO nac-board
+ * Contains nac-cells and tracks where they are
+ * Accepts moves, decides if they're valid
+ * Can be won when moves are made
+------
+ * state is {:cells {[x y] nac-cell}, :winner :x|:o|nil, :chan (chan)}
+ * takes clicks from the cells, and either passes them up :chan
+ * valid moves come down :chan, mutates cells
+ * if a winner is found, stops passing up clicks and displays a big X/O
+*** TODO meta-nac-board
+ * Has two players that alternate turns
+ * Contains nac-boards
+ * Dispatches moves to boards
+ * Decides which board is next
+ * Can be won
+------
+ * state is {:current player :x|:o, nac-boards {[x y]
+   nac-board}, :next-board [x y]|nil, winner :x|:o|nil}
+ * accepts clicks from the boards, decides if they're valid moves, and
+   dispatches the moves down to the boards
+ * keeps track of who's turn it is
+ * checks for winners
+** TODO Game Logic
+ * just a function to check winner (for implementing component logic)
+* Delightful Details [0/6]
+** TODO Hovering
+** TODO Highlight last cell played
+** TODO Colours
+** TODO Giant Winner Icons
+** TODO Show who's to play
+** TODO Highlight Legal Boards
+* Implementation follow Up
+** touch events
+** local session state saved
+** compile for publication, write up
