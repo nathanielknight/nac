@@ -41,7 +41,7 @@
    dispatches the moves down to the boards
  * keeps track of who's turn it is
  * checks for winners
-** TODO Game Logic
+** DONE Game Logic
  * just a function to check winner (for implementing component logic)
 * Delightful Details [0/6]
 ** TODO Hovering
