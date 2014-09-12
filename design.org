@@ -16,17 +16,19 @@
  * Represents a single board cell
  * Can contain an X or an O or be blank
  * Can be clicked on to make a move (if it's blank)
+ * knows where it is so it can add info to click events
 ------
- * state is {:contains :x|:o|nil, :chan (chan)}
+ * app-state is location, contains
+ * local-state is a channel for sending up messages
  * onclick sends a message up the chan if the cell is empty
 *** TODO nac-board
- * Contains nac-cells and tracks where they are
- * Accepts moves, decides if they're valid
+ * Contains nac-cells, knows where it is in meta-board
+ * Collects moves, checks them with meta-boards
  * Can be won when moves are made
 ------
- * state is {:cells {[x y] nac-cell}, :winner :x|:o|nil, :chan (chan)}
- * takes clicks from the cells, and either passes them up :chan
- * valid moves come down :chan, mutates cells
+ * app-state is a collection of cells, a winner, and a location (in meta)
+ * local-state is a chan for talking to meta and chans for the cells
+   (init them here)
  * if a winner is found, stops passing up clicks and displays a big X/O
 *** TODO meta-nac-board
  * Has two players that alternate turns

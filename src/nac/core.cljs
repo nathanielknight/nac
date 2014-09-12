@@ -4,35 +4,30 @@
             [om.dom :as dom :include-macros true]
             [cljs.core.async :refer [<! put! chan]]
 ;            [nac.repl]
-            [nac.components :refer [render-board]]
-            [nac.game :refer [new-game]]))
+            [nac.components :refer [nac-cell]]))
 
 (enable-console-print!)
 
 ;; Initial State
-(def app-state (atom (new-game)))
+(def app-state (atom {:x 1, :y 1, :z 1, :contains nil}))
 
 (defn nac-app [app-state owner]
   (reify
     om/IInitState
     (init-state [_]
-      {:reset-chan (chan)})
-
+      {:chan (chan)})
     om/IWillMount
     (will-mount [_]
-      (let [reset-chan (om/get-state owner :reset-chan)]
+      (let [c (om/get-state owner :chan)]
         (go-loop []
-                 (let [click (<! reset-chan)]
-                   (om/update! app-state (new-game))
+                 (let [x (<! c)]
+                   (print "jkl")
                    (recur)))))
+    
     om/IRenderState
-    (render-state [this state]
-      (dom/div nil
-              (dom/button
-               #js {:onClick
-                    (fn [e] (put! (:reset-chan state) :click))}
-               "New Game")
-              (om/build render-board app-state)))))
+    (render-state [_ state]
+      (let [c (om/get-state owner :chan)]
+        (om/build nac-cell app-state {:init-state {:chan c}})))))
 
 
 ;; Exec main
