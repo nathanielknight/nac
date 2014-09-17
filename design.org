@@ -1,19 +1,7 @@
-* Rules
-** Regular NaC
- * There are two players.
- * They take turns claiming squares in a 3x3 grid
- * First player to claim 3 squares in a line wins.
-** Meta NaC
- * There are two players.
- * They take turns taking turns in a 3x3 grid of regular NaC boards.
- * The next turn must take place in the board corresponding to the
-   square that was last played unless that board is already won, in
-   which case the turn may be taken on any un-won board.
- * The first player to win three boards in a row wins.
 * Implementation Details
 Currently working on a straight NaC. Just need to do top-level game
 logic, styling; shouldn't need to touch components.cljs
-** TODO Components [1/3]
+** TODO Components [2/3]
 *** DONE nac-cell
  * Represents a single board cell
  * Can contain an X or an O or be blank
@@ -23,7 +11,7 @@ logic, styling; shouldn't need to touch components.cljs
  * app-state is location, contains
  * local-state is a channel for sending up messages
  * onclick sends a message up the chan if the cell is empty
-*** TODO nac-board
+*** DONE nac-board
  * Contains nac-cells, knows where it is in meta-board
  * Collects moves, checks them with meta-boards
  * Can be won when moves are made
@@ -46,7 +34,8 @@ logic, styling; shouldn't need to touch components.cljs
    dispatches the moves down to the boards
  * keeps track of who's turn it is
  * checks for winners
-** DONE Game Logic
+** IN-PROGRESS [#A] Game Logic 
+ * fix combinations (not doing longer combinations correctly)
  * just a function to check winner (for implementing component logic)
 * Delightful Details [0/6]
 ** TODO Hovering
@@ -59,3 +48,15 @@ logic, styling; shouldn't need to touch components.cljs
 ** touch events
 ** local session state saved
 ** compile for publication, write up
+* Rules
+** Regular NaC
+ * There are two players.
+ * They take turns claiming squares in a 3x3 grid
+ * First player to claim 3 squares in a line wins.
+** Meta NaC
+ * There are two players.
+ * They take turns taking turns in a 3x3 grid of regular NaC boards.
+ * The next turn must take place in the board corresponding to the
+   square that was last played unless that board is already won, in
+   which case the turn may be taken on any un-won board.
+ * The first player to win three boards in a row wins.
