@@ -51,3 +51,6 @@
         (apply dom/div nil
                (om/build-all nac-cell cells {:init-state {:chan c}}))))))
 
+;;== Initial app state ==========================
+(defn blank-nac-state []
+  {:player :x, :winner nil, :cells (blank-board 0)})
