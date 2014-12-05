@@ -4,6 +4,7 @@ $dy: 50px;
 
 /*Page Layout*/
 div#container{
+    width: 30em;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -14,6 +15,7 @@ div#app {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 1em;
     background-color: hsla(107, 32%, 41%, 1)
 }
 button.resetbutton {}
@@ -36,7 +38,7 @@ div.nac-board{
 
 /*Board Trappings*/
 button.cell:hover{
-    background-color: blue;
+    background-color: hsla(92, 34%, 57%, 1);
 }
 button.cell {
     position: absolute;
