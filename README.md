@@ -4,7 +4,7 @@ By Nat Egan-Pimblett
 
 An Om/core.async implementation of naughts and crosses. 
 
-You can try it out [here](neganp.github.io/static/nac).
+You can try it out [here](http://neganp.github.io/static/nac).
 
 To get it set up for yourself, you'll need Leiningen installed (and a
 SASS processor of your choice to compile `style.scss`). Clone the
